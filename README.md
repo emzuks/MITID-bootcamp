@@ -2,6 +2,13 @@
 Everything you need for MITID bootcamp!
 
 [Johnny five → J5.js](#johnny-five)
+[   - Firmata](#firmata)
+[   - P5.js](#p5js)
+[   - components documentation](#johnny-five-documentation-for-almost-each-components-from-your-kit)
+
+
+
+
 
 
 ## johnny five
