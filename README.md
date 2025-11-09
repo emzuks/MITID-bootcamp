@@ -1,15 +1,18 @@
 # MITID-bootcamp
 Everything you need for MITID bootcamp!
 
+## Table of content
+
+- [How to use this repo](#how-to-use-this-repo)
 - [Johnny five → J5.js](#johnny-five)
   * [Firmata](#firmata)
-  * [P5.js](#p5js)
+  * [Add johnny five to your P5.js sketch](#p5js)
   * [Components documentation](#johnny-five-documentation-for-almost-each-components-from-your-kit)
+- [ML5.js](#)
 
+## How to use this repo
 
-
-
-
+For each new sketch you want to create, duplicate the `sketch` folder.
 
 ## johnny five
 
@@ -70,20 +73,20 @@ https://johnny-five.io/api/led/
 
 ### johnny five documentation for (almost) each components from your kit
 
-OUTPUTS
+**OUTPUTS**
 - [Led↗](https://johnny-five.io/api/led/)
 - [RGB led↗](https://johnny-five.io/api/led.rgb/)
 - [Piezo (buzzer)↗](https://johnny-five.io/api/piezo/)
 - [Servo↗](https://johnny-five.io/api/servo/)
 - [Motor↗](https://johnny-five.io/api/motor/)
-- [LCD screen↗](https://johnny-five.io/api/lcd/)
+- [LCD screen↗](https://johnny-five.io/api/lcd/) [ + show me example](https://editor.p5js.org/methio/sketches/5C3DsmEnI)
 ```javascript 
     // LCD controller
     lcd = new five.LCD({
         controller: "PCF8574T",
     });  
 ```
-INPUTS
+**INPUTS**
 - [Button↗](https://johnny-five.io/api/button/)
 - [Sensor (light sensor and potentiometer for instance)↗](https://johnny-five.io/api/sensor/)
 
@@ -91,4 +94,45 @@ Components available in the makers'lab
 - [Joystick↗](https://johnny-five.io/api/joystick/)
 - [Motion sensor↗](https://johnny-five.io/api/motion/)
 
+## ML5.js
+
+### BodyPose
+
+```javascript 
+
+    let video;        // variable to store webcam
+    let bodyPose;     // variable to store bodyPose model
+    let poses = [];   // variable to store poses the model sends us
+
+    // Load the model
+    function preload() {
+        bodyPose = ml5.bodyPose();
+    }
+
+    function setup() {
+        // 🙋🏻‍♂️ We need to have a canvas
+        createCanvas(640, 480);
+        frameRate(12); // 👨🏻‍🚒🚒 in case computer starts burning
+        
+        // Create the video and hide it
+        video = createCapture(VIDEO);
+        video.size(640, 480);
+        video.hide();
+
+        // Start detecting poses with the webcam video as an input, output can be found in poses array
+        bodyPose.detectStart(video, results=>poses=results);
+    }
+
+    function draw(){
+        // display video in the canvas
+        image(video, 0, 0, width, height);        
+
+        // check if at least one person is detected
+        if(poses.length>0){
+
+            // console.log what the model detects
+            console.log(poses);
+        }
+    }
+```
 
